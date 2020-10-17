@@ -2,7 +2,12 @@
 
 This is my personal text based assistant.
 
-## TODO
+## Techniques Used
+
+* Natural Language processing
+* Multiple APIs for home automation
+
+## TO DO
 
 * Lights and smart plug control
 * Weather info on request
