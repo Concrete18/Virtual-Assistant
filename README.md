@@ -1,10 +1,11 @@
-# Home Assistant
+# Virtual Assistant
 
-This is my personal text based assistant.
+This is my virtual text-based assistant.
 
 ## Techniques Used
 
 * Natural Language processing
+* LancasterStemmer used to stem words and remove stopwords
 * Multiple APIs for home automation
 
 ## TO DO
@@ -15,4 +16,5 @@ This is my personal text based assistant.
 * Open specific folders
 * Roku control
 * Audio Settings control
-* Text to speech
+
+### Icon made by Freepik from flaticon.com
