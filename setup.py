@@ -1,4 +1,7 @@
-from Assistant import Assistant
 
-App = Assistant('Clara', 'Michael', 'Concrete')
-App.Install_nltk_data()
+
+def Install_nltk_data():
+    pass
+    # nltk.download('stopwords')
+
+Install_nltk_data()
