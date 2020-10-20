@@ -18,7 +18,7 @@
 			"context_set": ""
 		},
 		{
-			"tag": "ask_about_it",
+			"tag": "ask_about_assistant",
 			"patterns": ["How are you", "Good day", "Whats up"],
 			"responses": ["Hello!", "Good to see you again!", "Hi there, how can I help?"],
 			"context_set": ""
