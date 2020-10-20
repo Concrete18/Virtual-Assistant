@@ -10,7 +10,7 @@ from Assistant import Assistant
 import json
 import difflib
 import random
-import speech_recognition as sr
+# import speech_recognition as sr
 
 
 class Func:
@@ -55,13 +55,16 @@ class Func:
         # TODO Add threading
         def text_to_speech(text):
             tts = gTTS(text=text, lang='en')
-            date_string = dt.datetime.now().strftime("%d%m%Y%H%M%S")
-            filename = f'voice{date_string}.mp3'
+            # date_string = dt.datetime.now().strftime("%d%m%Y%H%M%S")
+            filename = 'voice.mp3'
+            if os.path.exists(filename):
+                os.remove(filename)
             tts.save(filename)
             playsound.playsound(filename)
             os.remove(filename)
         thread = threading.Thread(target=text_to_speech(text))
         thread.start()
+
 
     def Random_Response(self, responses):
         '''Randomly picks a response from a list of given responses.
@@ -79,18 +82,22 @@ class Func:
             self.Speak(responses[index])
         print('')
 
-    def get_audio(self, ):
-    	r = sr.Recognizer()
-    	with sr.Microphone() as source:
-    		audio = r.listen(source)
-    		said = ""
 
-    		try:
-    		    said = r.recognize_google(audio)
-    		    print(said)
-    		except Exception as e:
-    		    print("Exception: " + str(e))
-    	return said.lower()
+    # def get_audio(self):
+    # 	r = sr.Recognizer()
+    # 	with sr.Microphone() as source:
+    # 		audio = r.listen(source)
+    # 		said = ""
+    # 		try:
+    # 		    said = r.recognize_google(audio)
+    # 		    print(said)
+    # 		except Exception as e:
+    # 		    print("Exception: " + str(e))
+    # 	return said.lower()
+
+
+    # print('getting audio')
+    # print(get_audio())
 
 
     def Simplify_Phrase(self, sentence):

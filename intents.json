@@ -25,7 +25,7 @@
 		},
 		{
 			"tag": "appreciation",
-			"patterns": ["thanks for the help", "I appreciate it", "thanks"],
+			"patterns": ["thanks for the help", "I appreciate it", "thanks", "oh well thanks anyway"],
 			"responses": ["Your welcome!", "It is no trouble at all."],
 			"context_set": ""
 		},

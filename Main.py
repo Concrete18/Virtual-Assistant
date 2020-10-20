@@ -19,7 +19,7 @@ def Name_Test():
 def Main():
 	'''Main Initialization function.'''
 	# start_phrases = Func.phrase_data['other_responses']['start_phrases']
-	# Random_Response(start_phrases)
+	# Func.Random_Response(f'{start_phrases}')
 	start_phrase = f"I am {Action.assistant_name}, how can I help you?"
 	print(start_phrase)
 	Func.Speak(start_phrase)
