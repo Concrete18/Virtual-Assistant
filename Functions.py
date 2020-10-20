@@ -46,7 +46,7 @@ class Func:
                     matched_pattern = pattern
                     responses = item['responses']
         if self.debug == 1:
-            print('Final pick is:',tag,'\n',max_similarity,'\n',matched_pattern,'\n')
+            print(f'Final pick is: {tag} with similarity:{max_similarity}\n{matched_pattern}\n')
         return tag, responses
 
 
@@ -55,7 +55,6 @@ class Func:
         # TODO Add threading
         def text_to_speech(text):
             tts = gTTS(text=text, lang='en')
-            # date_string = dt.datetime.now().strftime("%d%m%Y%H%M%S")
             filename = 'voice.mp3'
             if os.path.exists(filename):
                 os.remove(filename)
