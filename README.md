@@ -15,4 +15,10 @@ This is my virtual text-based assistant.
 * Open specific folders
 * Roku control
 
+## Executable Creation
+
+Run this with pyinstaller
+'''cmd
+Pyinstaller -w --onefile virtual_assistant.py'''
+
 ### Icon made by Freepik from flaticon.com
