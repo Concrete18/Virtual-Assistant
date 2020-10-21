@@ -10,11 +10,9 @@ This is my virtual text-based assistant.
 
 ## TO DO
 
-* Lights and smart plug control
+* Speech Recognition
 * Weather info on request
-* VR mode control
 * Open specific folders
 * Roku control
-* Audio Settings control
 
 ### Icon made by Freepik from flaticon.com

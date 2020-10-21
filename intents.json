@@ -37,7 +37,7 @@
 		},
 		{
 			"tag": "goodbye",
-			"patterns": ["cya", "See you later", "Goodbye", "I am Leaving", "Have a Good day", "Goodnight"],
+			"patterns": ["cya", "See you later", "Goodbye", "I am Leaving", "Have a Good day", "Goodnight", "quit"],
 			"responses": ["Talk to you later", "Goodbye!"],
 			"context_set": ""
 		},
@@ -48,27 +48,45 @@
 			"context_set": ""
 		},
 		{
+			"tag": "backlight",
+			"patterns": ["turn on backlight", "turn on bedroom lights"],
+			"responses": ["Turning on lights.", "Setting lights to on."],
+			"context_set": ""
+		},
+		{
 			"tag": "turn_off_lights",
 			"patterns": ["turn off my lights", "turn off bedroom lights"],
 			"responses": ["Turning off lights.", "Setting lights to off."],
 			"context_set": ""
 		},
 		{
-			"tag": "toggle_heater",
-			"patterns": ["turn on my heater", "turn off my heater"],
-			"responses": ["Toggling Heater Now"],
+			"tag": "start_vr",
+			"patterns": ["start vr mode", "start steamvr","start steam vr"],
+			"responses": ["Starting VR.", "Entering The Matrix."],
 			"context_set": ""
 		},
 		{
-			"tag": "set_audio_to_PC",
-			"patterns": ["Audio to PC"],
-			"responses": ["Setting Audio to PC.", "Set to PC Audio"],
+			"tag": "toggle_heater",
+			"patterns": ["turn my heater on", "turn on my heater", "turn my heater off", "turn off my heater"],
+			"responses": ["Toggling Heaters"],
+			"context_set": ""
+		},
+		{
+			"tag": "set_audio_default",
+			"patterns": ["Audio to PC", "Audio to Headphones", "Audio to TV"],
+			"responses": ["Setting audio.", "Setting default audio."],
+			"context_set": ""
+		},
+		{
+			"tag": "display_switch",
+			"patterns": ["Switch display to TV", "Switch display to PC"],
+			"responses": ["Switching Display now.", "Set to Headphones Audio"],
 			"context_set": ""
 		},
 		{
 			"tag": "jojo",
 			"patterns": ["Are you approaching me?", "Za Warudo"],
-			"responses": ["Is that a Jojo reference?", "Set to PC Audio"],
+			"responses": ["Is that a Jojo reference?"],
 			"context_set": ""
 		},
 		{
@@ -80,7 +98,7 @@
 	],
 "other_responses":
 	{
-		"start_phrases": ["I am {App.name}, how can I help you?"],
+		"start_phrases": ["I am {App.name}, how can I help you?", "Hello, I am {App.name}."],
 		"unknown": ["I am not sure what you said", "Can you try again?"]
 	}
 }

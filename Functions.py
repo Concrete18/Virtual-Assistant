@@ -1,19 +1,19 @@
 from nltk.stem.lancaster import LancasterStemmer
 from nltk.tokenize import word_tokenize
 import nltk
+from Actions import Actions
 from gtts import gTTS
 import datetime as dt
 import playsound
 import threading
-import os
-from Assistant import Assistant
-import json
 import difflib
 import random
-# import speech_recognition as sr
+import json
+import os
 
 
 class Func:
+
 
     def __init__(self):
         with open("intents.json") as file:
@@ -43,16 +43,15 @@ class Func:
                 if similarity > max_similarity and similarity > self.similarity_req:
                     max_similarity = similarity
                     tag = item['tag']
-                    matched_pattern = pattern
+                    matched_pattern = pattern.lower()
                     responses = item['responses']
         if self.debug == 1:
             print(f'Final pick is: {tag} with similarity:{max_similarity}\n{matched_pattern}\n')
-        return tag, responses
+        return tag, responses, matched_pattern
 
 
     def Speak(self, text):
         '''Using gTTS, verbally says the text variable with Text-To_Speech '''
-        # TODO Add threading
         def text_to_speech(text):
             tts = gTTS(text=text, lang='en')
             filename = 'voice.mp3'
@@ -74,29 +73,14 @@ class Func:
         "voice_response": 1,
 
         "text_response": 1'''
-        index = random.randrange(len(responses))
+        choice = responses[random.randrange(0, len(responses))]
+        # if '{' in choice:
+        #     self.Speak(choice.format(name=App.name))
         if self.text_response:
-            print(responses[index])
+            print(choice)
         if self.voice_response:
-            self.Speak(responses[index])
+            self.Speak(choice)
         print('')
-
-
-    # def get_audio(self):
-    # 	r = sr.Recognizer()
-    # 	with sr.Microphone() as source:
-    # 		audio = r.listen(source)
-    # 		said = ""
-    # 		try:
-    # 		    said = r.recognize_google(audio)
-    # 		    print(said)
-    # 		except Exception as e:
-    # 		    print("Exception: " + str(e))
-    # 	return said.lower()
-
-
-    # print('getting audio')
-    # print(get_audio())
 
 
     def Simplify_Phrase(self, sentence):
@@ -113,5 +97,5 @@ class Func:
         for w in word_tokens:
             if w not in stop_words:
                 filtered_sentence.append(w)
+        # print(f'filtered sentence: {filtered_sentence}')
         return filtered_sentence
-
