@@ -17,4 +17,10 @@ This is my virtual text-based assistant.
 * Roku control
 * Audio Settings control
 
+## Executable Creation
+
+Run this with pyinstaller
+'''cmd
+Pyinstaller -w --onefile virtual_assistant.py'''
+
 ### Icon made by Freepik from flaticon.com
