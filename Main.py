@@ -1,21 +1,20 @@
 from Actions import Actions
 from Functions import Func
 
-
 func = Func()
 Action = Actions('Clara', 'Michael', 'Concrete', func)
 
 
 def Main():
 	'''Main Initialization function.'''
-	# start_phrases = func.phrase_data['other_responses']['start_phrases']
-	# func.Random_Response(f'{start_phrases}')
-	start_phrase = f"Hello, I'm {Action.assistant_name}."
-	print(start_phrase)
-	func.Speak(start_phrase)
+	print(f"{Action.assistant_name}: Hello, I'm {Action.assistant_name}.")
+	Action.Speak(f"Hello, I'm {Action.assistant_name}.")
 	while True:
 		tag = ''
 		user_input = input()
+		if user_input == '':
+			continue
+		print()
 		tag, responses, pattern = func.Phrase_Matcher(user_input)
 		# Hue lights and Smarthub Actions
 		if tag == 'turn_on_lights':
@@ -42,7 +41,7 @@ def Main():
 		elif tag == '':
 			responses = func.phrase_data['other_responses']['unknown']
 		if responses[0] != '':  # This is for blocking the response if an Action handles it.
-			func.Random_Response(responses)
+			Action.Random_Response(responses)
 		if tag == 'goodbye':
 			quit()
 
