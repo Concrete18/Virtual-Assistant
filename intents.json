@@ -3,11 +3,11 @@
 	{
 		"voice_response": 1,
 		"text_response": 1,
-		"voice_mode":0,
+		"voice_mode": 0,
 		"preferred_mic": "unknown",
 		"similarity_req": 0.6,
-		"disable_voice_without_pref_mic":1,
-		"debug": 1
+		"disable_voice_without_pref_mic": 1,
+		"debug": 0
 	},
 "intents":
 	[
@@ -19,21 +19,33 @@
 		},
 		{
 			"tag": "ask_about_assistant",
-			"patterns": ["How are you", "Good day", "Whats up"],
-			"responses": ["Hello!", "Good to see you again!", "Hi there, how can I help?"],
+			"patterns": ["How are you", "Whats up"],
+			"responses": ["Doing well, thanks for asking!", "Not much has changed, thanks for asking!"],
+			"context_set": ""
+		},
+		{
+			"tag": "help",
+			"patterns": ["How can you help me?", "What can you do?"],
+			"responses": [
+				"I can give you useful info such as the date or the current time.",
+				"You can ask me to toggle your lights or switch to a specific Hue scene.",
+				"I can tell you one of my many jokes. Please don't be too hard on my humor though. I am learning.",
+				"You can ask me to switch your PC's default audio device.",
+				"I can toggle your smart plugs."
+						],
 			"context_set": ""
 		},
 		{
 			"tag": "appreciation",
 			"patterns": ["thanks for the help", "I appreciate it", "thanks", "oh well thanks anyway"],
-			"responses": ["Your welcome!", "It is no trouble at all."],
+			"responses": ["Your welcome!", "It is no trouble at all.", "It is what I am here for."],
 			"context_set": ""
 		},
 		{
 			"tag": "joke",
 			"patterns": [
-					"Can you tell me a joke?", "have any jokes", "do you know any jokes?", "Can I hear a joke?",
-					"Can you tell me another joke."
+					"Can you tell me a joke?", "have any jokes?", "do you know any jokes?", "Can I hear a joke?",
+					"Can you tell me another joke?", "Another joke please."
 						],
 			"responses":[
 				"You'll never guess who I bumped into on the way to the opticians! Everyone.",
@@ -77,7 +89,7 @@
 		{
 			"tag": "toggle_heater",
 			"patterns": ["turn my heater on", "turn on my heater", "turn my heater off", "turn off my heater"],
-			"responses": ["Toggling Heaters"],
+			"responses": ["Toggling Heater"],
 			"context_set": ""
 		},
 		{
@@ -116,7 +128,6 @@
 	],
 "other_responses":
 	{
-		"start_phrases": ["I am {App.name}, how can I help you?", "Hello, I am {App.name}."],
-		"unknown": ["I am not sure what you said", "Can you try again?"]
+		"unknown": ["I am not sure what you said.", "Can you try again?", "I do not understand your response."]
 	}
 }
