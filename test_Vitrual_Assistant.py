@@ -23,10 +23,16 @@ class Test_Phrase_Matcher(unittest.TestCase):
         'thanks for all the help?':'appreciation',
         'Hello assistant':'greeting',
         'start vr':'start_vr',
+        'what is todays date?':'date_time',
+        'what time is it?':'date_time',
         }
         for string, tag in test_strings.items():
             self.assertEqual(func.Phrase_Matcher(string)[0], tag)
 
+        # data = func.phrase_data['intents']
+        # for entry in data:
+        #     self.assertEqual(func.Phrase_Matcher(entry['patterns'])[0], tag)
+        #     print(tag)
 
 if __name__ == '__main__':
     unittest.main()

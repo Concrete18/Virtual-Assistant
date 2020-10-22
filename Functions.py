@@ -1,7 +1,6 @@
 from nltk.stem.lancaster import LancasterStemmer
 from nltk.tokenize import word_tokenize
 import nltk
-from Actions import Actions
 from gtts import gTTS
 import datetime as dt
 import playsound
@@ -51,7 +50,7 @@ class Func:
 
 
     def Speak(self, text):
-        '''Using gTTS, verbally says the text variable with Text-To_Speech '''
+        '''Using gTTS, verbally says the text variable with Text-To-Speech '''
         def text_to_speech(text):
             tts = gTTS(text=text, lang='en')
             filename = 'voice.mp3'
@@ -60,8 +59,11 @@ class Func:
             tts.save(filename)
             playsound.playsound(filename)
             os.remove(filename)
-        thread = threading.Thread(target=text_to_speech(text))
-        thread.start()
+        try:
+            thread = threading.Thread(target=text_to_speech(text))
+            thread.start()
+        except:
+            pass
 
 
     def Random_Response(self, responses):
@@ -84,7 +86,8 @@ class Func:
 
 
     def Simplify_Phrase(self, sentence):
-        '''ph'''
+        '''Uses NLTK to and a stopwords list to stem and shorten
+        the inputted sentence to remove unneeded information.'''
         with open("stopwords.txt", "r") as f:
             stopwords = f.read()
         stemmer = LancasterStemmer()

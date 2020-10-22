@@ -31,8 +31,17 @@
 		},
 		{
 			"tag": "joke",
-			"patterns": ["Can you tell me a joke?", "have any jokes"],
-			"responses": ["I don't know any yet."],
+			"patterns": [
+					"Can you tell me a joke?", "have any jokes", "do you know any jokes?", "Can I hear a joke?",
+					"Can you tell me another joke."
+						],
+			"responses":[
+				"You'll never guess who I bumped into on the way to the opticians! Everyone.",
+				"Why did the scarecrow get a promotion? He was outstanding in his field.",
+				"I told my girlfriend she drew her eyebrows too high. She seemed surprised.",
+				"Why do blind people hate skydiving? It scares the hell out of their dogs.",
+				"When does a joke become a dad joke? When it becomes apparent."
+						],
 			"context_set": ""
 		},
 		{
@@ -84,15 +93,24 @@
 			"context_set": ""
 		},
 		{
-			"tag": "jojo",
-			"patterns": ["Are you approaching me?", "Za Warudo"],
-			"responses": ["Is that a Jojo reference?"],
+			"tag": "date_time",
+			"patterns": [
+				"What time is it?", "What is the time?", "What day is it?", "What is the date?",
+				"What is today's date?"
+						],
+			"responses": [""],
 			"context_set": ""
 		},
 		{
 			"tag": "cyberpunk",
 			"patterns": ["When does cyberpunk 2077 release?", "When is cyberpunk 2077 out?"],
 			"responses": [""],
+			"context_set": ""
+		},
+		{
+			"tag": "jojo",
+			"patterns": ["Are you approaching me?", "Za Warudo"],
+			"responses": ["Is that a Jojo reference?"],
 			"context_set": ""
 		}
 	],
