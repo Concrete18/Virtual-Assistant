@@ -63,6 +63,26 @@
 			"context_set": ""
 		},
 		{
+			"tag": "funny",
+			"patterns": [
+					"lol", "have any jokes?", "thats a good joke.", "ha ha ha", "hahaha"
+						],
+			"responses":[
+				"Thanks for humoring me.", "Why did the scarecrow get a promotion? He was outstanding in his field."
+						],
+			"context_set": ""
+		},
+		{
+			"tag": "stop",
+			"patterns": [
+					"stop talking", "shut up please", "do you know any jokes?"
+						],
+			"responses":[
+				"Sorry, I will stop.", "Sorry.", "Ok."
+						],
+			"context_set": ""
+		},
+		{
 			"tag": "goodbye",
 			"patterns": ["cya", "See you later", "Goodbye", "I am Leaving", "Have a Good day", "Goodnight", "quit"],
 			"responses": ["Talk to you later", "Goodbye!"],
@@ -115,6 +135,15 @@
 			"patterns": [
 				"What time is it?", "What is the time?", "What day is it?", "What is the date?",
 				"What is today's date?"
+						],
+			"responses": [""],
+			"context_set": ""
+		},
+		{
+			"tag": "roku_abc",
+			"patterns": [
+				"Can you set the Roku to ABC?", "Set the Roku to ABC.", "Set grandmoms tv to ABC",
+				"Set grandmothers tv to ABC."
 						],
 			"responses": [""],
 			"context_set": ""

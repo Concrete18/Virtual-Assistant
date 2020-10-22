@@ -11,6 +11,7 @@ import threading
 from gtts import gTTS
 from time import sleep
 import os
+from roku import Roku
 import random
 
 
@@ -53,7 +54,7 @@ class Actions:
             pass
 
 
-    def Random_Response(self, responses):
+    def Respond(self, responses):
         if type(responses) == str:
             choice = responses
         else:
@@ -70,8 +71,7 @@ class Actions:
         '''Speaks and says how many days til the subject releases.'''
         time_till = dt.datetime(month=month, day=day, year=year) - dt.datetime.now()
         text = f'{subject} is out in {time_till.days} days.'
-        print(text)
-        self.Random_Response(text)
+        self.Respond(text)
 
 
     def Display_Switch(self, pattern):
@@ -120,8 +120,26 @@ class Actions:
             response = f'It is {dt.datetime.now().strftime("%I:%M %p")}'
         elif 'date' or 'day' in pattern:
             response = f"Today's date is {dt.datetime.now().strftime('%A, %d %B %Y')}"
-        self.Random_Response(response)
+        self.Respond(response)
 
 
     def Roku(self, action):
-        pass
+        '''Switches display to the mode entered as an argument. Works for PC and TV mode.'''
+        roku = Roku('192.168.0.131')
+        def Callback():
+            self.Respond('Switching to ABC')
+            youtube = roku['YouTube TV']
+            youtube.launch()
+            sleep(10)
+            roku.right()
+            sleep(1)
+            for _ in range(2):
+                roku.down()
+                sleep(.5)
+            roku.enter()
+            if 'YouTube TV' in str(roku.active_app):
+                self.Respond('I set the Roku to ABC News.')
+            else:
+                self.Respond('I was unable to set the Roku to ABC News.')
+        ABC = threading.Thread(target=Callback)
+        ABC.start()
