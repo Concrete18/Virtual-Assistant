@@ -42,6 +42,12 @@
 			"context_set": ""
 		},
 		{
+			"tag": "mic_check",
+			"patterns": ["Can you hear me?", "Can you understand me?", "thanks", "oh well thanks anyway"],
+			"responses": ["Yes, loud and clear.", "Yes, ready to help.", "Yes, I'm listening."],
+			"context_set": ""
+		},
+		{
 			"tag": "joke",
 			"patterns": [
 					"Can you tell me a joke?", "have any jokes?", "do you know any jokes?", "Can I hear a joke?",
