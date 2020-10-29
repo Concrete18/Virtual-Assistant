@@ -2,7 +2,7 @@ from Actions import Actions
 from Functions import Func
 
 func = Func()
-Action = Actions('Clara', 'Michael', 'Concrete', func)
+Action = Actions(assistant_name='Clara', user_name='Michael', user_nickname='Concrete', func_obj=func)
 
 
 def Main():
@@ -12,10 +12,10 @@ def Main():
 	while True:
 		tag = ''
 		user_input = input()
-		if user_input == '':
+		if user_input == '':  # allows for skipping to beginingg if no response
 			continue
 		print()
-		tag, responses, pattern = func.Phrase_Matcher(user_input)
+		tag, responses, pattern = func.Phrase_Matcher(user_input)  # takes user_input and gets match information
 		# Hue lights and Smarthub Actions
 		if tag == 'turn_on_lights':
 			Action.Hue_Hub.run_scene('My Bedroom', 'Bright', 1)
@@ -43,7 +43,7 @@ def Main():
 		elif tag == '':
 			responses = func.phrase_data['other_responses']['unknown']
 		if responses[0] != '':  # This is for blocking the response if an Action handles it.
-			Action.Random_Response(responses)
+			Action.Respond(responses)
 		if tag == 'goodbye':
 			quit()
 

@@ -20,7 +20,12 @@ class Func:
 
 
     def Phrase_Matcher(self, phrase):
-        '''Matches phrases to patterns in intent.json'''
+        '''Matches phrases to patterns in intent.json
+
+        Arguments:
+
+        phrase -- phrase that is checked for best match
+        '''
         intents = self.phrase_data['intents']
         max_similarity = 0
         matched_pattern = ''
@@ -44,7 +49,12 @@ class Func:
 
     def Simplify_Phrase(self, sentence):
         '''Uses NLTK to and a stopwords list to stem and shorten
-        the inputted sentence to remove unneeded information.'''
+        the inputted sentence to remove unneeded information.
+
+        Arguments:
+
+        sentence -- sentence is simplified
+        '''
         with open("stopwords.txt", "r") as f:
             stopwords = f.read()
         stemmer = LancasterStemmer()

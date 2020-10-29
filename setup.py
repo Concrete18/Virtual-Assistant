@@ -1,7 +1,7 @@
+import nltk
 
 
 def Install_nltk_data():
-    pass
-    # nltk.download('stopwords')
+    nltk.download('punkt')
 
 Install_nltk_data()

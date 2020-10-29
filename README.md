@@ -14,14 +14,5 @@ functions.
 * Speech Recognition
 * Weather info on request
 * Open specific folders
-* Roku control
-
-## Executable Creation (WIP)
-
-Run this with Pyinstaller within the script directory
-
-```cmd
-pyinstaller Main.py --name "Virtual Assistant" --icon icon.ico --distpath EXE --onefile
-```
 
 ### Icon made by Freepik from flaticon.com
