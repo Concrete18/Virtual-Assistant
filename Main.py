@@ -11,9 +11,12 @@ def Main():
 	Action.Speak(f"Hello, I'm {Action.assistant_name}.")
 	while True:
 		tag = ''
-		user_input = input()
-		if user_input == '':  # allows for skipping to beginingg if no response
-			continue
+		if Action.voice_mode == 1:
+			user_input = Action.speech_recognition()
+		else:
+			user_input = input()
+			if user_input == '':  # allows for skipping to beginingg if no response
+				continue
 		print()
 		tag, responses, pattern = func.Phrase_Matcher(user_input)  # takes user_input and gets match information
 		# Hue lights and Smarthub Actions

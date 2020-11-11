@@ -1,4 +1,4 @@
-# from Set_to_ABC import Change_to_ABC, Check_If_Youtube_TV
+import speech_recognition as speech
 from pyHS100 import SmartPlug
 from phue import Bridge
 import datetime as dt
@@ -25,6 +25,7 @@ class Actions:
         self.user_name = user_name
         self.user_nickname = user_nickname
         self.func_obj = func_obj
+        self.voice_mode = self.phrase_data['settings']['voice_mode']
         self.disable_voice_without_pref_mic = self.phrase_data['settings']['disable_voice_without_pref_mic']
         self.voice_response = self.phrase_data['settings']['voice_response']
         self.text_response = self.phrase_data['settings']['text_response']
@@ -37,7 +38,18 @@ class Actions:
         self.ahk_tv = 'Run nircmd setdefaultsounddevice "SONY TV" 1'
 
 
-    def Speak(self, text):
+    @staticmethod
+    def speech_recognition():
+        audio_text = ""
+        read_audio=speech.Recognizer()
+        with speech.Microphone() as input_source:
+            audio = read_audio.listen(input_source)
+            audio_text = read_audio.recognize_google(audio)
+        return audio_text
+
+
+    @staticmethod
+    def Speak(text):
         '''Using gTTS, verbally says the text variable with Text-To-Speech Text-To-Speech
 
         Arguments:

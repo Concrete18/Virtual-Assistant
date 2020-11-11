@@ -32,7 +32,6 @@ class Func:
         tag = ''
         responses = ''
         prepped_phrase = self.Simplify_Phrase(phrase)
-        example_sent = "This is a sample sentence, showing off the stop words filtration."
         for item in intents:
             for pattern in item['patterns']:
                 prepped_pattern = self.Simplify_Phrase(pattern)
@@ -59,7 +58,6 @@ class Func:
             stopwords = f.read()
         stemmer = LancasterStemmer()
         sentence = stemmer.stem(sentence.lower())
-        # stop_words = set(stopwords.words('english'))
         stop_words = set(stopwords)
         word_tokens = word_tokenize(sentence)
         filtered_sentence = [w for w in word_tokens if not w in stop_words]
@@ -67,5 +65,6 @@ class Func:
         for w in word_tokens:
             if w not in stop_words:
                 filtered_sentence.append(w)
-        # print(f'filtered sentence: {filtered_sentence}')
+        if self.debug == 1:
+            print(f'filtered sentence: {filtered_sentence}')
         return filtered_sentence
