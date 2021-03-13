@@ -1,55 +1,120 @@
-from Actions import Actions
-from Functions import Func
+from nltk.stem.lancaster import LancasterStemmer
+from nltk.tokenize import word_tokenize
+from pyHS100 import SmartPlug
+from phue import Bridge
+from ahk import AHK
+import difflib
+import random
+import json
 
-func = Func()
-Action = Actions(assistant_name='Clara', user_name='Michael', user_nickname='Concrete', func_obj=func)
+
+class Assistant:
+
+	# module init
+	stemmer = LancasterStemmer()
+	with open("stopwords.txt", "r") as f:
+		stop_words = set(f.read())
+
+	# obj init
+	Hue_Hub = Bridge('192.168.0.134')
+	Heater = SmartPlug('192.168.0.146')
+	Lighthouse = SmartPlug('192.168.0.196')
+	ahk = AHK(executable_path='C:/Program Files/AutoHotkey/AutoHotkey.exe')
+	ahk_speakers = 'Run nircmd setdefaultsounddevice "Logitech Speakers" 1'
+	ahk_headphones = 'Run nircmd setdefaultsounddevice "Headphones"'
+	ahk_tv = 'Run nircmd setdefaultsounddevice "SONY TV" 1'
 
 
-def Main():
-	'''Main Initialization function.'''
-	print(f"{Action.assistant_name}: Hello, I'm {Action.assistant_name}.")
-	Action.Speak(f"Hello, I'm {Action.assistant_name}.")
-	while True:
-		tag = ''
-		if Action.voice_mode == 1:
-			user_input = Action.speech_recognition()
+	def __init__(self, assistant_name, user_name, user_nickname):
+		# config init
+		with open("intents.json") as file:
+			self.data = json.load(file)
+		self.similarity_req = self.data['settings']['similarity_req']
+		self.debug = self.data['settings']['debug']
+		self.intents = self.data['intents']
+
+		# name init
+		self.assistant_name = assistant_name
+		self.user_name = user_name
+		self.user_nickname = user_nickname
+
+
+	def phrase_matcher(self, phrase):
+		max_similarity = 0
+		prepped_phrase = self.Simplify_Phrase(phrase)
+		for item in self.intents:
+				for pattern in item['patterns']:
+					prepped_pattern = self.Simplify_Phrase(pattern)
+				similarity = difflib.SequenceMatcher(None, prepped_pattern, prepped_phrase).ratio()
+				if similarity > max_similarity and similarity > self.similarity_req:
+					max_similarity = similarity
+					match_data['pattern'] = pattern.lower()
+					match_data = item
+		if self.debug == 1:
+			print(f'Final pick is: {match_data["tag"]} with similarity:{max_similarity}\n{match_data["pattern"]}\n')
+		return match_data
+
+
+	def simplify_phrase(self, sentence):
+		sentence = self.stemmer.stem(sentence.lower())
+		word_tokens = word_tokenize(sentence)
+		filtered_sentence = [word for word in word_tokens if not word in self.stop_words]
+		for word in word_tokens:
+			if word not in self.stop_words:
+				filtered_sentence.append(word)
+		if self.debug == 1:
+			print(f'filtered sentence: {filtered_sentence}')
+		return filtered_sentence
+
+
+	def respond(self, responses):
+		if type(responses) == str:
+			choice = responses
 		else:
+			choice = responses[random.randrange(0, len(responses))]
+		print(f'{self.assistant_name}: {choice}\n')
+
+
+	def main(self):
+		'''
+		Main Initialization function.
+		'''
+		print(f"{self.assistant_name}: Hello, I'm {self.assistant_name}.")
+		while True:
 			user_input = input()
 			if user_input == '':  # allows for skipping to beginingg if no response
 				continue
-		print()
-		tag, responses, pattern = func.Phrase_Matcher(user_input)  # takes user_input and gets match information
-		# Hue lights and Smarthub Actions
-		if tag == 'turn_on_lights':
-			Action.Hue_Hub.run_scene('My Bedroom', 'Bright', 1)
-		if tag == 'backlight':
-			Action.Hue_Hub.run_scene('My Bedroom', 'Backlight', 1)
-		elif tag == 'turn_off_lights':
-			Action.Hue_Hub.set_group('My Bedroom', 'on', False)
-		elif tag == 'toggle_heater':
-			Action.Toggle_heater(pattern)
-		# Computer Control Actions
-		elif tag == 'set_audio_default':
-			Action.Set_Audio_Default(pattern)
-		elif tag == 'display_switch':
-			Action.Display_Switch(pattern)
-		elif tag == 'start_vr':
-			Action.Start_VR()
-		# Informational Actions
-		elif tag == 'date_time':
-			Action.Check_Time_Date(pattern)
-		elif tag == 'cyberpunk':
-			Action.Time_Till('Cyberpunk 2077', 11,19,2020)
-		elif tag == 'roku_abc':
-			Action.Roku_to_ABC()
-		# End of Actions
-		elif tag == '':
-			responses = func.phrase_data['other_responses']['unknown']
-		if responses[0] != '':  # This is for blocking the response if an Action handles it.
-			Action.Respond(responses)
-		if tag == 'goodbye':
-			quit()
+			match_dict = self.phrase_matcher(user_input)  # takes user_input and gets match information
+			# Hue lights and Smarthub Actions
+			if match_dict['tag'] == 'turn_on_lights':
+				self.Hue_Hub.run_scene('My Bedroom', 'Bright', 1)
+			if match_dict['tag'] == 'backlight':
+				self.Hue_Hub.run_scene('My Bedroom', 'Backlight', 1)
+			elif match_dict['tag'] == 'turn_off_lights':
+				self.Hue_Hub.set_group('My git pBedroom', 'on', False)
+			elif match_dict['tag'] == 'toggle_heater':
+				self.Toggle_heater(match_dict['pattern'])
+			# Computer Control Actions
+			elif match_dict['tag'] == 'set_audio_default':
+				self.Set_Audio_Default(match_dict['pattern'])
+			elif match_dict['tag'] == 'display_switch':
+				self.Display_Switch(match_dict['pattern'])
+			elif match_dict['tag'] == 'start_vr':
+				self.Start_VR()
+			# Informational Actions
+			elif match_dict['tag'] == 'date_time':
+				self.Check_Time_Date(match_dict['pattern'])
+			elif match_dict['tag'] == 'roku_abc':
+				self.Roku_to_ABC()
+			# End of Actions
+			elif match_dict['tag'] == '':
+				responses = self.phrase_data['other_responses']['unknown']
+			if responses[0] != '':  # This is for blocking the response if an action handles it.
+				self.Respond(responses)
+			if match_dict['tag'] == 'goodbye':
+				exit()
 
 
 if __name__ == "__main__":
-	Main()
+	App = Assistant('Clara', 'Michael', 'Concrete')
+	App.main()

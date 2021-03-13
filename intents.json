@@ -1,13 +1,8 @@
 {
 "settings":
 	{
-		"voice_response": 1,
-		"text_response": 1,
-		"voice_mode": 0,
-		"preferred_mic": "unknown",
 		"similarity_req": 0.6,
-		"disable_voice_without_pref_mic": 1,
-		"debug": 0
+		"debug": 1
 	},
 "intents":
 	[
@@ -42,12 +37,6 @@
 			"context_set": ""
 		},
 		{
-			"tag": "mic_check",
-			"patterns": ["Can you hear me?", "Can you understand me?", "thanks", "oh well thanks anyway"],
-			"responses": ["Yes, loud and clear.", "Yes, ready to help.", "Yes, I'm listening."],
-			"context_set": ""
-		},
-		{
 			"tag": "joke",
 			"patterns": [
 					"Can you tell me a joke?", "have any jokes?", "do you know any jokes?", "Can I hear a joke?",
@@ -75,7 +64,7 @@
 		{
 			"tag": "stop",
 			"patterns": [
-					"stop talking", "shut up please", "do you know any jokes?"
+					"stop talking", "shut up please"
 						],
 			"responses":[
 				"Sorry, I will stop.", "Sorry.", "Ok."
@@ -137,27 +126,6 @@
 				"What is today's date?"
 						],
 			"responses": [""],
-			"context_set": ""
-		},
-		{
-			"tag": "roku_abc",
-			"patterns": [
-				"Can you set the Roku to ABC?", "Set the Roku to ABC.", "Set grandmoms tv to ABC",
-				"Set grandmothers tv to ABC."
-						],
-			"responses": [""],
-			"context_set": ""
-		},
-		{
-			"tag": "cyberpunk",
-			"patterns": ["When does cyberpunk 2077 release?", "When is cyberpunk 2077 out?"],
-			"responses": [""],
-			"context_set": ""
-		},
-		{
-			"tag": "jojo",
-			"patterns": ["Are you approaching me?", "Za Warudo"],
-			"responses": ["Is that a Jojo reference?"],
 			"context_set": ""
 		}
 	],
