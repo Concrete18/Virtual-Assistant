@@ -17,6 +17,14 @@ import random
 
 class Actions:
 
+    Hue_Hub = Bridge('192.168.0.134')
+    Heater = SmartPlug('192.168.0.146')
+    Lighthouse = SmartPlug('192.168.0.196')
+    ahk = AHK(executable_path='C:/Program Files/AutoHotkey/AutoHotkey.exe')
+    ahk_speakers = 'Run nircmd setdefaultsounddevice "Logitech Speakers" 1'
+    ahk_headphones = 'Run nircmd setdefaultsounddevice "Headphones"'
+    ahk_tv = 'Run nircmd setdefaultsounddevice "SONY TV" 1'
+
 
     def __init__(self, assistant_name, user_name, user_nickname, func_obj):
         with open("intents.json") as file:
@@ -25,33 +33,7 @@ class Actions:
         self.user_name = user_name
         self.user_nickname = user_nickname
         self.func_obj = func_obj
-        self.disable_voice_without_pref_mic = self.phrase_data['settings']['disable_voice_without_pref_mic']
-        self.voice_response = self.phrase_data['settings']['voice_response']
         self.text_response = self.phrase_data['settings']['text_response']
-        self.Hue_Hub = Bridge('192.168.0.134')
-        self.Heater = SmartPlug('192.168.0.146')
-        self.Lighthouse = SmartPlug('192.168.0.196')
-        self.ahk = AHK(executable_path='C:/Program Files/AutoHotkey/AutoHotkey.exe')
-        self.ahk_speakers = 'Run nircmd setdefaultsounddevice "Logitech Speakers" 1'
-        self.ahk_headphones = 'Run nircmd setdefaultsounddevice "Headphones"'
-        self.ahk_tv = 'Run nircmd setdefaultsounddevice "SONY TV" 1'
-
-
-    def Speak(self, text):
-        '''Using gTTS, verbally says the text variable with Text-To-Speech '''
-        def text_to_speech(text):
-            tts = gTTS(text=text, lang='en')
-            filename = 'voice.mp3'
-            if os.path.exists(filename):
-                os.remove(filename)
-            tts.save(filename)
-            playsound.playsound(filename)
-            os.remove(filename)
-        try:
-            thread = threading.Thread(target=text_to_speech(text))
-            thread.start()
-        except:
-            pass
 
 
     def Respond(self, responses):
@@ -63,8 +45,6 @@ class Actions:
         #     self.Speak(choice.format(name=App.name))
         if self.text_response:
             print(f'{self.assistant_name}: {choice}\n')
-        if self.voice_response:
-            self.Speak(choice)
 
 
     def Time_Till(self, subject, month, day, year):

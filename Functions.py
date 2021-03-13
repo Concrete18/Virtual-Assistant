@@ -13,8 +13,6 @@ class Func:
     def __init__(self):
         with open("intents.json") as file:
             self.phrase_data = json.load(file)
-        self.voice_mode = self.phrase_data['settings']['voice_mode']
-        self.preferred_mic = self.phrase_data['settings']['preferred_mic']
         self.similarity_req = self.phrase_data['settings']['similarity_req']
         self.debug = self.phrase_data['settings']['debug']
 
