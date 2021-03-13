@@ -6,9 +6,10 @@ Action = Actions('Clara', 'Michael', 'Concrete', func)
 
 
 def Main():
-	'''Main Initialization function.'''
+	'''
+	Main Initialization function.
+	'''
 	print(f"{Action.assistant_name}: Hello, I'm {Action.assistant_name}.")
-	Action.Speak(f"Hello, I'm {Action.assistant_name}.")
 	while True:
 		tag = ''
 		user_input = input()
@@ -35,8 +36,6 @@ def Main():
 		# Informational Actions
 		elif tag == 'date_time':
 			Action.Check_Time_Date(pattern)
-		elif tag == 'cyberpunk':
-			Action.Time_Till('Cyberpunk 2077', 11,19,2020)
 		elif tag == 'roku_abc':
 			Action.Roku_to_ABC()
 		# End of Actions

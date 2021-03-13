@@ -1,17 +1,12 @@
-# from Set_to_ABC import Change_to_ABC, Check_If_Youtube_TV
 from pyHS100 import SmartPlug
 from phue import Bridge
 import datetime as dt
 from ahk import AHK
-from Functions import Func
 import json
 import subprocess
-import playsound
 import threading
-from gtts import gTTS
 from time import sleep
 import os
-from roku import Roku
 import random
 
 
@@ -36,7 +31,7 @@ class Actions:
         self.text_response = self.phrase_data['settings']['text_response']
 
 
-    def Respond(self, responses):
+    def respond(self, responses):
         if type(responses) == str:
             choice = responses
         else:
@@ -47,14 +42,16 @@ class Actions:
             print(f'{self.assistant_name}: {choice}\n')
 
 
-    def Time_Till(self, subject, month, day, year):
-        '''Speaks and says how many days til the subject releases.'''
+    def time_till(self, subject, month, day, year):
+        '''
+        Speaks and says how many days til the subject releases.
+        '''
         time_till = dt.datetime(month=month, day=day, year=year) - dt.datetime.now()
         text = f'{subject} is out in {time_till.days} days.'
-        self.Respond(text)
+        self.respond(text)
 
 
-    def Display_Switch(self, pattern):
+    def display_switch(self, pattern):
         '''Switches display to the mode entered as an argument. Works for PC and TV mode.'''
         if 'TV' in pattern:
             mode = 'TV'
@@ -68,7 +65,7 @@ class Actions:
             self.ahk.run_script(self.ahk_tv, blocking=False)
 
 
-    def Set_Audio_Default(self, pattern):
+    def set_audio_default(self, pattern):
         '''Sets the audio device depending on the device is mentioned in the pattern.'''
         if 'pc' in pattern:
             self.ahk.run_script(self.ahk_speakers, blocking=False)
@@ -78,7 +75,7 @@ class Actions:
             self.ahk.run_script(self.ahk_headphones, blocking=False)
 
 
-    def Toggle_heater(self, pattern):
+    def toggle_heater(self, pattern):
         '''Turns the heater on or off depending on if ON or OFF is in the pattern.'''
         if 'on' in pattern:
             self.Heater.turn_on()
@@ -86,40 +83,18 @@ class Actions:
             self.Heater.turn_off()
 
 
-    def Start_VR(self):
+    def start_vr(self):
         '''Start VR Function.'''
         if self.Lighthouse.get_sysinfo()["relay_state"] == 0:
             self.Lighthouse.turn_on()
         subprocess.call("D:/My Installed Games/Steam Games/steamapps/common/SteamVR/bin/win64/vrstartup.exe")
 
 
-    def Check_Time_Date(self, pattern):
+    def check_time_date(self, pattern):
         '''Says the Date or time depending on which is in the pattern chosen.'''
         response = ''
         if 'time' in pattern:
             response = f'It is {dt.datetime.now().strftime("%I:%M %p")}'
         elif 'date' or 'day' in pattern:
             response = f"Today's date is {dt.datetime.now().strftime('%A, %d %B %Y')}"
-        self.Respond(response)
-
-
-    def Roku(self, action):
-        '''Switches display to the mode entered as an argument. Works for PC and TV mode.'''
-        roku = Roku('192.168.0.131')
-        def Callback():
-            self.Respond('Switching to ABC')
-            youtube = roku['YouTube TV']
-            youtube.launch()
-            sleep(10)
-            roku.right()
-            sleep(1)
-            for _ in range(2):
-                roku.down()
-                sleep(.5)
-            roku.enter()
-            if 'YouTube TV' in str(roku.active_app):
-                self.Respond('I set the Roku to ABC News.')
-            else:
-                self.Respond('I was unable to set the Roku to ABC News.')
-        ABC = threading.Thread(target=Callback)
-        ABC.start()
+        self.respond(response)
