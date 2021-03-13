@@ -40,16 +40,16 @@ class Assistant:
 
 
 	def phrase_matcher(self, phrase):
-		max_similarity = 0
-		prepped_phrase = self.Simplify_Phrase(phrase)
+		max_similarity = self.similarity_req
+		prepped_phrase = self.simplify_phrase(phrase)
 		for item in self.intents:
-				for pattern in item['patterns']:
-					prepped_pattern = self.Simplify_Phrase(pattern)
-				similarity = difflib.SequenceMatcher(None, prepped_pattern, prepped_phrase).ratio()
-				if similarity > max_similarity and similarity > self.similarity_req:
-					max_similarity = similarity
-					match_data['pattern'] = pattern.lower()
-					match_data = item
+			for pattern in item['patterns']:
+				prepped_pattern = self.simplify_phrase(pattern)
+			similarity = difflib.SequenceMatcher(None, prepped_pattern, prepped_phrase).ratio()
+			if similarity > max_similarity:
+				max_similarity = similarity
+				match_data = item
+				match_data['pattern'] = pattern.lower()
 		if self.debug == 1:
 			print(f'Final pick is: {match_data["tag"]} with similarity:{max_similarity}\n{match_data["pattern"]}\n')
 		return match_data
@@ -85,32 +85,33 @@ class Assistant:
 			if user_input == '':  # allows for skipping to beginingg if no response
 				continue
 			match_dict = self.phrase_matcher(user_input)  # takes user_input and gets match information
-			# Hue lights and Smarthub Actions
-			if match_dict['tag'] == 'turn_on_lights':
-				self.Hue_Hub.run_scene('My Bedroom', 'Bright', 1)
-			if match_dict['tag'] == 'backlight':
-				self.Hue_Hub.run_scene('My Bedroom', 'Backlight', 1)
-			elif match_dict['tag'] == 'turn_off_lights':
-				self.Hue_Hub.set_group('My git pBedroom', 'on', False)
-			elif match_dict['tag'] == 'toggle_heater':
-				self.Toggle_heater(match_dict['pattern'])
-			# Computer Control Actions
-			elif match_dict['tag'] == 'set_audio_default':
-				self.Set_Audio_Default(match_dict['pattern'])
-			elif match_dict['tag'] == 'display_switch':
-				self.Display_Switch(match_dict['pattern'])
-			elif match_dict['tag'] == 'start_vr':
-				self.Start_VR()
-			# Informational Actions
-			elif match_dict['tag'] == 'date_time':
-				self.Check_Time_Date(match_dict['pattern'])
-			elif match_dict['tag'] == 'roku_abc':
-				self.Roku_to_ABC()
+			if 'Action' in match_dict.keys():
+				# Hue lights and Smarthub Actions
+				if match_dict['tag'] == 'turn_on_lights':
+					self.Hue_Hub.run_scene('My Bedroom', 'Bright', 1)
+				if match_dict['tag'] == 'backlight':
+					self.Hue_Hub.run_scene('My Bedroom', 'Backlight', 1)
+				elif match_dict['tag'] == 'turn_off_lights':
+					self.Hue_Hub.set_group('My git pBedroom', 'on', False)
+				elif match_dict['tag'] == 'toggle_heater':
+					self.Toggle_heater(match_dict['pattern'])
+				# Computer Control Actions
+				elif match_dict['tag'] == 'set_audio_default':
+					self.Set_Audio_Default(match_dict['pattern'])
+				elif match_dict['tag'] == 'display_switch':
+					self.Display_Switch(match_dict['pattern'])
+				elif match_dict['tag'] == 'start_vr':
+					self.Start_VR()
+				# Informational Actions
+				elif match_dict['tag'] == 'date_time':
+					self.Check_Time_Date(match_dict['pattern'])
+				elif match_dict['tag'] == 'roku_abc':
+					self.Roku_to_ABC()
 			# End of Actions
 			elif match_dict['tag'] == '':
 				responses = self.phrase_data['other_responses']['unknown']
 			if responses[0] != '':  # This is for blocking the response if an action handles it.
-				self.Respond(responses)
+				self.respond(responses)
 			if match_dict['tag'] == 'goodbye':
 				exit()
 
