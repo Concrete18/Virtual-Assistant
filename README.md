@@ -6,13 +6,11 @@ functions.
 ## Techniques Used
 
 * Natural Language processing
-* LancasterStemmer used to stem words and NLTK stopwords list was used as a base for my custom list
-* Multiple APIs for home automation
+* NLTK via LancasterStemmer, tokenization and stopwords was used as a base for my custom list
+* Multiple APIs for Home Automation
 
 ## TO DO
 
-* Speech Recognition
-* Weather info on request
 * Open specific folders
 
 ### Icon made by Freepik from flaticon.com
