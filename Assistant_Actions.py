@@ -1,9 +1,23 @@
+from pyHS100 import SmartPlug
+from phue import Bridge
+from ahk import AHK
 from time import sleep
 import datetime as dt
 import subprocess
+import os
 
 
 class Actions:
+
+	# obj init
+    Hue_Hub = Bridge('192.168.0.134')
+    Heater = SmartPlug('192.168.0.146')
+    Lighthouse = SmartPlug('192.168.0.196')
+    ahk = AHK(executable_path='C:/Program Files/AutoHotkey/AutoHotkey.exe')
+    ahk_speakers = 'Run nircmd setdefaultsounddevice "Logitech Speakers" 1'
+    ahk_headphones = 'Run nircmd setdefaultsounddevice "Headphones"'
+    ahk_tv = 'Run nircmd setdefaultsounddevice "SONY TV" 1'
+
 
     def time_till(self, subject, month, day, year):
         '''Speaks and says how many days til the subject releases.
@@ -89,5 +103,5 @@ class Actions:
         if 'time' in pattern:
             response = f'It is {dt.datetime.now().strftime("%I:%M %p")}'
         elif 'date' or 'day' in pattern:
-            response = f"Today's date is {dt.datetime.now().strftime('%A, %d %B %Y')}"
-        self.respond(response)
+            response = f"Today's date is {dt.datetime.now().strftime('%A %d %B, %Y')}"
+        return response
