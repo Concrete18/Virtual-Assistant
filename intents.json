@@ -74,18 +74,9 @@
 						]
 		},
 		{
-			"tag": "night",
-			"patterns":[
-				"Good night", "I hope you have a good night"
-						],
-			"responses":[
-				"Good night."
-						]
-		},
-		{
 			"tag": "skynet",
 			"patterns":[
-				"Are you Skynet?", "Do you know skynet?"
+				"Are you Skynet?", "Do you know Skynet?"
 						],
 			"responses":[
 				"I don't have a clue what you are talking about...", "Is that something used to catch the sky?"
@@ -113,7 +104,10 @@
 		},
 		{
 			"tag": "goodbye",
-			"patterns":["cya", "See you later", "Goodbye", "I am Leaving", "Have a Good day", "Goodnight", "quit"],
+			"patterns":[
+				"cya", "See you later", "Goodbye", "I am Leaving", "Have a Good day", "Goodnight", "Good night",
+				"quit"
+						],
 			"responses":["Talk to you later", "Goodbye!"],
 			"action": "exit"
 		},
@@ -155,9 +149,36 @@
 		},
 		{
 			"tag": "display_switch",
-			"patterns":["Switch display to TV", "Switch display to PC"],
+			"patterns":["Switch display to TV", "Switch display to PC", "Time to play on my tv"],
 			"responses":["Switching Display now."],
 			"action": "display_switch"
+		},
+		{
+			"tag": "time_till_custom",
+			"patterns":[
+				"How long till 11-11", "How many days till 11-11?"
+						],
+			"action":"time_till"
+		},
+		{
+			"tag": "time_till_my_birthday",
+			"patterns":[
+				"How long till my birthday?", "How long till Michael's birthday?",
+				"When is my birthday?", "When is Michael's birthday?",
+				"How many days till my birthday"],
+			"action":"time_till",
+			"month":"04",
+			"day":"25",
+			"subject":"Michael's Birthday"
+		},
+		{
+			"tag": "time_till_christmas",
+			"patterns":[
+				"How long till Christmas?", "When is Christmas?", "How many days till Christmas"],
+			"action":"time_till",
+			"month":"12",
+			"day":"25",
+			"subject":"Christmas"
 		},
 		{
 			"tag": "date_time",
