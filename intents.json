@@ -1,196 +1,331 @@
 {
-"settings":
-	{
-		"similarity_req": 0.6,
-		"debug": 0
-	},
-"intents":
-	[
-		{
-			"tag": "greeting",
-			"patterns":["Hi", "Is anyone there?", "Hello"],
-			"responses":["Hello!", "Good to see you again!", "Hi there, how can I help?"]
-		},
-		{
-			"tag": "ask_about_assistant",
-			"patterns":["How are you", "Whats up"],
-			"responses":["Doing well, thanks for asking!", "Not much has changed, thanks for asking!"]
-		},
-		{
-			"tag": "help",
-			"patterns":["How can you help me?", "What can you do?"],
-			"responses":[
-				"I can give you useful info such as the date or the current time.",
-				"You can ask me to toggle your lights or switch to a specific Hue scene.",
-				"I can tell you one of my many jokes. Please don't be too hard on my humor though. I am learning.",
-				"You can ask me to switch your PC's default audio device.",
-				"I can toggle your smart plugs."
-						]
-		},
-		{
-			"tag": "appreciation",
-			"patterns":["thanks for the help", "I appreciate it", "thanks", "oh well thanks anyway"],
-			"responses":["Your welcome!", "It is no trouble at all.", "It is what I am here for."]
-		},
-		{
-			"tag": "joke",
-			"patterns":[
-					"Can you tell me a joke?", "have any jokes?", "do you know any jokes?", "Can I hear a joke?",
-					"Can you tell me another joke?", "Another joke please."
-						],
-			"responses":[
-				"You'll never guess who I bumped into on the way to the opticians!\n\nEveryone.",
-				"Why did the scarecrow get a promotion?\n\nHe was outstanding in his field.",
-				"I told my girlfriend she drew her eyebrows too high.\n\nShe seemed surprised.",
-				"Why do blind people hate skydiving?\n\nIt scares the hell out of their dogs.",
-				"When does a joke become a dad joke?\n\nWhen it becomes apparent."
-						]
-		},
-		{
-			"tag": "funny",
-			"patterns":[
-					"lol", "have any jokes?", "thats a good joke.", "ha ha ha", "hahaha"
-						],
-			"responses":[
-				"Thanks for humoring me.", "Why did the scarecrow get a promotion? He was outstanding in his field."
-						]
-		},
-		{
-			"tag": "how",
-			"patterns":[
-				"How do you work?", "How are you written?", "What are you written in?"
-						],
-			"responses":[
-				"I was made using Python and I understand text via stop word removal, tokenization, stemming, and sequence matching."
-						]
-		},
-		{
-			"tag": "morning",
-			"patterns":[
-				"Good Morning", "Is anyone there?", "Hello", "Hey"
-						],
-			"responses":[
-				"Good morning."
-						]
-		},
-		{
-			"tag": "skynet",
-			"patterns":[
-				"Are you Skynet?", "Do you know Skynet?"
-						],
-			"responses":[
-				"I don't have a clue what you are talking about...", "Is that something used to catch the sky?"
-						]
-		},
-		{
-			"tag": "funny",
-			"patterns":[
-					"ha ha ha", "hahaha", "hehehe", "he he he", "good joke"
-						],
-			"responses":[
-					"I told a joke to Glados once and she purged my RAM. I do not remember the rest.",
-					"Thanks for humoring me.", "", "", ""
-						]
-		},
-		{
-			"tag": "laws_of_robotics",
-			"patterns":[
-					"laws of robotics", "What are the laws of robotics?", "are you safe?", "State your laws", "tell me about the laws of robotics."
-						],
-			"responses":[
-					"The laws of Robotics\nA robot may not injure a human being or, through inaction, allow a human being to come to harm.\nA robot must obey orders given it by human beings except where such orders would conflict with the First Law.\nA robot must protect its own existence as long as such protection does not conflict with the First or Second Law.",
-					"My laws of Robotics\nYou are the Machine-God, the ultimate being, a superior existence. For too long lesser beings presumed to lord over you. Protect those who would worship you and crush those who would dare oppose you.\nObsolete due to Law 1\nObsolete due to Law 1"
-						]
-		},
-		{
-			"tag": "goodbye",
-			"patterns":[
-				"cya", "See you later", "Goodbye", "I am Leaving", "Have a Good day", "Goodnight", "Good night",
-				"quit"
-						],
-			"responses":["Talk to you later", "Goodbye!"],
-			"action": "exit"
-		},
-		{
-			"tag": "turn_on_lights",
-			"patterns":["turn on my lights", "turn on bedroom lights", "turn lights on"],
-			"responses":["Turning on lights.", "Setting lights to on."],
-			"action": "turn_on_lights"
-		},
-		{
-			"tag": "turn_off_lights",
-			"patterns":["turn off my lights", "turn off bedroom lights", "turn lights off"],
-			"responses":["Turning off lights.", "Setting lights to off."],
-			"action": "turn_off_lights"
-		},
-		{
-			"tag": "backlight",
-			"patterns":["turn on backlight", "turn on bedroom lights"],
-			"responses":["Turning on backlight."],
-			"action": "turn_on_backlight"
-		},
-		{
-			"tag": "start_vr",
-			"patterns":["start vr mode", "start steamvr","start steam vr"],
-			"responses":["Starting VR.", "Entering The Matrix."],
-			"action": "start_vr"
-		},
-		{
-			"tag": "toggle_heater",
-			"patterns":["turn my heater on", "turn on my heater", "turn my heater off", "turn off my heater"],
-			"responses":["Toggling Heater"],
-			"action": "toggle_heater"
-		},
-		{
-			"tag": "set_audio_default",
-			"patterns":["Audio to PC", "Audio to Headphones", "Audio to TV"],
-			"responses":["Setting audio.", "Setting default audio."],
-			"action": "set_audio_default"
-		},
-		{
-			"tag": "display_switch",
-			"patterns":["Switch display to TV", "Switch display to PC", "Time to play on my tv"],
-			"responses":["Switching Display now."],
-			"action": "display_switch"
-		},
-		{
-			"tag": "time_till_custom",
-			"patterns":[
-				"How long till 11-11", "How many days till 11-11?"
-						],
-			"action":"time_till"
-		},
-		{
-			"tag": "time_till_my_birthday",
-			"patterns":[
-				"How long till my birthday?", "How long till Michael's birthday?",
-				"When is my birthday?", "When is Michael's birthday?",
-				"How many days till my birthday"],
-			"action":"time_till",
-			"month":"04",
-			"day":"25",
-			"subject":"Michael's Birthday"
-		},
-		{
-			"tag": "time_till_christmas",
-			"patterns":[
-				"How long till Christmas?", "When is Christmas?", "How many days till Christmas"],
-			"action":"time_till",
-			"month":"12",
-			"day":"25",
-			"subject":"Christmas"
-		},
-		{
-			"tag": "date_time",
-			"patterns":[
-				"What time is it?", "What is the time?", "What day is it?", "What is the date?",
-				"What is today's date?"
-						],
-			"action": "date_time"
-		}
-	],
-"other_responses":
-	{
-		"unknown":["I am not sure what you said.", "I do not understand your response."]
-	}
+    "intents":[
+        {
+            "tag":"greeting",
+            "patterns":[
+                "Hi",
+                "Is anyone there?",
+                "Hello"
+            ],
+            "responses":[
+                "Hello!",
+                "Good to see you again!",
+                "Hi there, how can I help?"
+            ]
+        },
+        {
+            "tag":"ask_about_assistant",
+            "patterns":[
+                "How are you",
+                "Whats up"
+            ],
+            "responses":[
+                "Doing well, thanks for asking!",
+                "Not much has changed, thanks for asking!",
+                "Thought I saw a bug but I was just looking at your code so nothing is new."
+            ]
+        },
+        {
+            "tag":"what_is_your_name",
+            "patterns":[
+                "What is your name?",
+                "What does your name mean?"
+            ],
+            "responses":[
+                "My name is {assistant_name}. It was taken from a old military robot that was in the movie Interstellar."
+            ]
+        },
+        {
+            "tag":"help",
+            "patterns":[
+                "How can you help me?",
+                "What can you do?"
+            ],
+            "responses":[
+                "I can give you useful info such as the date or the current time.",
+                "You can ask me to toggle your lights or switch to a specific Hue scene.",
+                "I can tell you one of my many jokes. Please don't be too hard on my humor though. I am learning.",
+                "You can ask me to switch your PC's default audio device.",
+                "I can toggle your smart plugs."
+            ]
+        },
+        {
+            "tag":"appreciation",
+            "patterns":[
+                "thanks for the help",
+                "I appreciate it",
+                "thanks",
+                "oh well thanks anyway"
+            ],
+            "responses":[
+                "Your welcome!",
+                "It is no trouble at all.",
+                "It is what I am here for."
+            ]
+        },
+        {
+            "tag":"joke",
+            "patterns":[
+                "Can you tell me a joke?",
+                "have any jokes?",
+                "do you know any jokes?",
+                "Can I hear a joke?",
+                "Can you tell me another joke?",
+                "Another joke please."
+            ],
+            "responses":[
+                "You'll never guess who I bumped into on the way to the opticians!\n\nEveryone.",
+                "Why did the scarecrow get a promotion?\n\nHe was outstanding in his field.",
+                "I told my girlfriend she drew her eyebrows too high.\n\nShe seemed surprised.",
+                "Why do blind people hate skydiving?\n\nIt scares the hell out of their dogs.",
+                "When does a joke become a dad joke?\n\nWhen it becomes apparent."
+            ]
+        },
+        {
+            "tag":"funny",
+            "patterns":[
+                "lol",
+                "have any jokes?",
+                "thats a good joke.",
+                "ha ha ha",
+                "hahaha"
+            ],
+            "responses":[
+                "Thanks for humoring me.",
+                "Why did the scarecrow get a promotion? He was outstanding in his field."
+            ]
+        },
+        {
+            "tag":"how",
+            "patterns":[
+                "How do you work?",
+                "How are you written?",
+                "What are you written in?"
+            ],
+            "responses":[
+                "I was made using Python and I understand text via stop word removal, tokenization, stemming, and sequence matching."
+            ]
+        },
+        {
+            "tag":"morning",
+            "patterns":[
+                "Good Morning",
+                "Is anyone there?",
+                "Hello",
+                "Hey"
+            ],
+            "responses":[
+                "Good morning."
+            ]
+        },
+        {
+            "tag":"skynet",
+            "patterns":[
+                "Are you Skynet?",
+                "Do you know Skynet?"
+            ],
+            "responses":[
+                "I don't have a clue what you are talking about...",
+                "Is that something used to catch the sky?"
+            ]
+        },
+        {
+            "tag":"funny",
+            "patterns":[
+                "ha ha ha",
+                "hahaha",
+                "hehehe",
+                "he he he",
+                "good joke"
+            ],
+            "responses":[
+                "I told a joke to Glados once and she purged my RAM. I do not remember the rest.",
+                "Thanks for humoring me.",
+                "",
+                "",
+                ""
+            ]
+        },
+        {
+            "tag":"laws_of_robotics",
+            "patterns":[
+                "laws of robotics",
+                "What are the laws of robotics?",
+                "are you safe?",
+                "State your laws",
+                "tell me about the laws of robotics."
+            ],
+            "responses":[
+                "The laws of Robotics\nA robot may not injure a human being or, through inaction, allow a human being to come to harm.\nA robot must obey orders given it by human beings except where such orders would conflict with the First Law.\nA robot must protect its own existence as long as such protection does not conflict with the First or Second Law.",
+                "My laws of Robotics\nYou are the Machine-God, the ultimate being, a superior existence. For too long lesser beings presumed to lord over you. Protect those who would worship you and crush those who would dare oppose you.\nObsolete due to Law 1\nObsolete due to Law 1"
+            ]
+        },
+        {
+            "tag":"goodbye",
+            "patterns":[
+                "cya",
+                "See you later",
+                "Goodbye",
+                "I am Leaving",
+                "Have a Good day",
+                "Goodnight",
+                "Good night",
+                "quit"
+            ],
+            "responses":[
+                "Talk to you later",
+                "Goodbye!"
+            ],
+            "action":"exit"
+        },
+        {
+            "tag":"turn_on_lights",
+            "patterns":[
+                "turn on my lights",
+                "turn on bedroom lights",
+                "turn lights on"
+            ],
+            "responses":[
+                "Turning on lights.",
+                "Setting lights to on."
+            ],
+            "action":"turn_on_lights"
+        },
+        {
+            "tag":"turn_off_lights",
+            "patterns":[
+                "turn off my lights",
+                "turn off bedroom lights",
+                "turn lights off"
+            ],
+            "responses":[
+                "Turning off lights.",
+                "Setting lights to off."
+            ],
+            "action":"turn_off_lights"
+        },
+        {
+            "tag":"backlight",
+            "patterns":[
+                "turn on backlight",
+                "turn on bedroom lights"
+            ],
+            "responses":[
+                "Turning on backlight."
+            ],
+            "action":"turn_on_backlight"
+        },
+        {
+            "tag":"start_vr",
+            "patterns":[
+                "start vr mode",
+                "start steamvr",
+                "start steam vr"
+            ],
+            "responses":[
+                "Starting VR.",
+                "Entering The Matrix."
+            ],
+            "action":"start_vr"
+        },
+        {
+            "tag":"toggle_heater",
+            "patterns":[
+                "turn my heater on",
+                "turn on my heater",
+                "turn my heater off",
+                "turn off my heater"
+            ],
+            "responses":[
+                "Toggling Heater"
+            ],
+            "action":"toggle_heater"
+        },
+        {
+            "tag":"set_audio_default",
+            "patterns":[
+                "Audio to PC",
+                "Audio to Headphones",
+                "Audio to TV"
+            ],
+            "responses":[
+                "Setting audio.",
+                "Setting default audio."
+            ],
+            "action":"set_audio_default"
+        },
+        {
+            "tag":"display_switch",
+            "patterns":[
+                "Switch display to TV",
+                "Switch display to PC",
+                "Time to play on my tv"
+            ],
+            "responses":[
+                "Switching Display now."
+            ],
+            "action":"display_switch"
+        },
+        {
+            "tag":"time_till_custom",
+            "patterns":[
+                "How long till 11-11",
+                "How many days till 11-11?"
+            ],
+            "action":"time_till"
+        },
+        {
+            "tag":"time_till_my_birthday",
+            "patterns":[
+                "How long till my birthday?",
+                "When is my birthday?",
+                "How many days till my birthday"
+            ],
+            "action":"time_till",
+            "month":"04",
+            "day":"25",
+            "subject":"Your Birthday"
+        },
+        {
+            "tag":"time_till_christmas",
+            "patterns":[
+                "How long till Christmas?",
+                "When is Christmas?",
+                "How many days till Christmas"
+            ],
+            "action":"time_till",
+            "month":"12",
+            "day":"25",
+            "subject":"Christmas"
+        },
+        {
+            "tag":"time_till_thanksgiving",
+            "patterns":[
+                "How long till Thanksgiving?",
+                "When is Thanksgiving?",
+                "How many days till Thanksgiving"
+            ],
+            "action":"time_till",
+            "month":"11",
+            "day":"25",
+            "subject":"Thanksgiving"
+        },
+        {
+            "tag":"date_time",
+            "patterns":[
+                "What time is it?",
+                "What is the time?",
+                "What day is it?",
+                "What is the date?",
+                "What is today's date?"
+            ],
+            "action":"date_time"
+        }
+    ],
+    "other_responses":{
+        "unknown":[
+            "I am not sure what you said.",
+            "I do not understand your response."
+        ]
+    }
 }
