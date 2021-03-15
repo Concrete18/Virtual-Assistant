@@ -1,8 +1,11 @@
 import nltk
 
-
-def Install_nltk_data():
+# TODO automate install of other modules
+def install_nltk_data():
+    print('Installing punkt....')
     nltk.download('punkt')
+    print('Install Complete.')
 
 
-Install_nltk_data()
+if __name__ == "__main__":
+    install_nltk_data()
