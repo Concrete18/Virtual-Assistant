@@ -30,22 +30,25 @@ class Assistant:
 
 
 	@classmethod
-	def simplify_phrase(cls, sentence):
+	def simplify_phrase(cls, sentence) -> list:
 		sentence = cls.stemmer.stem(sentence.lower())
 		word_tokens = word_tokenize(sentence)
 		return [word for word in word_tokens if not word in cls.stop_words]
 
 
 	@classmethod
-	def phrase_matcher(cls, phrase):
-		max_similarity = cls.similarity_req
+	def phrase_matcher(cls, phrase) -> dict:
+		max_similarity = 0
 		prepped_phrase = cls.simplify_phrase(phrase)
 		match_dict = {'tag':None}
 		for item in cls.intents:
 			for pattern in item['patterns']:
 				prepped_pattern = cls.simplify_phrase(pattern)
 				similarity = difflib.SequenceMatcher(None, prepped_pattern, prepped_phrase).ratio()
-				if similarity > max_similarity:
+				# print(pattern, similarity)
+				if similarity > max_similarity and similarity > cls.similarity_req:
+					if cls.debug == 1:
+						print(f'\nPattern: {pattern}\n{similarity}')
 					max_similarity = similarity
 					match_dict = item
 					match_dict['pattern'] = pattern.lower()
@@ -56,11 +59,11 @@ class Assistant:
 
 	@classmethod
 	def startup_convo(cls):
-		print(f"{cls.assistant_name}:\nHello {cls.user_name}, I am {cls.assistant_name}.")
+		print(f"{cls.assistant_name}:\nHello {cls.user_name}, How can I help?")
 
 
 	@classmethod
-	def respond(cls, response, use_input=0):
+	def respond(cls, response, use_input=0) -> str:
 		response = response.replace('{assistant_name}', cls.assistant_name)
 		response = response.replace('{user_name}', cls.user_name)
 		if use_input == 0:
@@ -99,7 +102,7 @@ class Assistant:
 					Action.Hue_Hub.set_group('My Bedroom', 'on', False)
 
 				elif match_dict['action'] == 'toggle_heater':
-					Action.toggle_heater(match_dict['pattern'])
+					response = Action.toggle_heater(match_dict['pattern'])
 
 				# Computer Control Actions
 				elif match_dict['action'] == 'open_folder':

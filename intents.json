@@ -5,11 +5,12 @@
             "patterns":[
                 "Hi",
                 "Is anyone there?",
-                "Hello"
+                "Hello",
+                "Hey"
             ],
             "responses":[
-                "Hello!",
-                "Good to see you again!",
+                "Hello {user_name}!",
+                "Good to see you again {user_name}.",
                 "Hi there, how can I help?"
             ]
         },
@@ -20,7 +21,7 @@
                 "Whats up"
             ],
             "responses":[
-                "Doing well, thanks for asking!",
+                "Doing well, thanks for asking {user_name}!",
                 "Not much has changed, thanks for asking!",
                 "Thought I saw a bug but I was just looking at your code so nothing is new."
             ]
@@ -32,7 +33,7 @@
                 "What does your name mean?"
             ],
             "responses":[
-                "My name is {assistant_name}. It was taken from a old military robot that was in the movie Interstellar."
+                "My name is {assistant_name}. It was taken from a old military robot from the movie Interstellar."
             ]
         },
         {
@@ -58,7 +59,7 @@
                 "oh well thanks anyway"
             ],
             "responses":[
-                "Your welcome!",
+                "Your welcome {user_name}!",
                 "It is no trouble at all.",
                 "It is what I am here for."
             ]
@@ -91,8 +92,7 @@
                 "hahaha"
             ],
             "responses":[
-                "Thanks for humoring me.",
-                "Why did the scarecrow get a promotion? He was outstanding in his field."
+                "Thanks for humoring me."
             ]
         },
         {
@@ -109,13 +109,10 @@
         {
             "tag":"morning",
             "patterns":[
-                "Good Morning",
-                "Is anyone there?",
-                "Hello",
-                "Hey"
+                "Good Morning"
             ],
             "responses":[
-                "Good morning."
+                "Good morning {user_name}."
             ]
         },
         {
@@ -183,11 +180,11 @@
             "patterns":[
                 "turn on my lights",
                 "turn on bedroom lights",
-                "turn lights on"
+                "turn lights on",
+                "I cant see anything."
             ],
             "responses":[
-                "Turning on lights.",
-                "Setting lights to on."
+                "Turning on lights."
             ],
             "action":"turn_on_lights"
         },
@@ -199,16 +196,14 @@
                 "turn lights off"
             ],
             "responses":[
-                "Turning off lights.",
-                "Setting lights to off."
+                "Turning off lights."
             ],
             "action":"turn_off_lights"
         },
         {
             "tag":"backlight",
             "patterns":[
-                "turn on backlight",
-                "turn on bedroom lights"
+                "turn on backlight"
             ],
             "responses":[
                 "Turning on backlight."
@@ -218,6 +213,7 @@
         {
             "tag":"start_vr",
             "patterns":[
+                "I would like to play VR.",
                 "start vr mode",
                 "start steamvr",
                 "start steam vr"

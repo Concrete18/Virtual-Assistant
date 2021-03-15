@@ -1,14 +1,15 @@
 import unittest
-from Assistant import Assist
+from Virtual_Assistant import Assistant
 
 
-class Test_Phrase_Matcher(unittest.TestCase):
+class Test_Virtual_Assistant(unittest.TestCase):
 
 
-    def test_Phrase_Matcher(self):
-        '''Tests Phrase_Matcher to be sure it returns the proper tags.'''
-        test = Assist('Clara', 'Michael', 'Concrete')
-        test.debug = 0
+    def test_phrase_matcher(self):
+        '''
+        Tests phrase_matcher to be sure it returns the proper tags.
+        '''
+        Assistant.debug = 0
 
         test_strings = {
         'Can you turn on my lights please?':'turn_on_lights',
@@ -23,9 +24,12 @@ class Test_Phrase_Matcher(unittest.TestCase):
         'start vr':'start_vr',
         'what is todays date?':'date_time',
         'what time is it?':'date_time',
+        'When is Christmas?':'time_till_christmas',
+        'When is Thanksgiving':'time_till_thanksgiving',
+        'When is Thanksgivin':'time_till_thanksgiving',
         }
         for string, tag in test_strings.items():
-            self.assertEqual(test.phrase_matcher(string)['tag'], tag)
+            self.assertEqual(Assistant.phrase_matcher(string)['tag'], tag)
 
 
 if __name__ == '__main__':

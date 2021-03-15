@@ -22,7 +22,7 @@ class Action:
 
 
     @classmethod
-    def time_till(cls, month, day, year=None, subject=None,):
+    def time_till(cls, month, day, year=None, subject=None,) -> str:
         '''
         Gives the time till the given date arrives.
         '''
@@ -111,8 +111,10 @@ class Action:
         '''
         if 'on' in pattern:
             cls.Heater.turn_on()
-        elif 'off' in pattern:
+            return 'Turned on the heater.'
+        elif 'of' in pattern:
             cls.Heater.turn_off()
+            return 'Turned off the heater.'
 
 
     @classmethod
@@ -127,7 +129,7 @@ class Action:
 
 
     @classmethod
-    def check_time_date(cls, pattern):
+    def check_time_date(cls, pattern) -> str:
         '''
         Says the Date or time depending on which is in the pattern chosen.
 

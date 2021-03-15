@@ -1,8 +1,8 @@
 {
     "settings":{
-        "assistant_name":"Tars",
-        "real_name":"Michael",
-        "similarity_req":0.6,
-        "debug":0
+        "assistant_name": "Tars",
+        "real_name": "Michael",
+        "similarity_req": 0.6,
+        "debug": 0
     }
 }
