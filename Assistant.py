@@ -3,14 +3,13 @@ from nltk.tokenize import word_tokenize
 import difflib
 import random
 import json
-from Assistant_Actions import Actions
+from Assistant_Actions import Action
 
 
 class Assistant:
 
 	# module init
 	stemmer = LancasterStemmer()
-	func = Actions()
 
 	# var init
 	with open("stopwords.txt", "r") as f:
@@ -26,8 +25,6 @@ class Assistant:
 		data = json.load(file)
 	assistant_name = data['settings']['assistant_name']
 	user_name = data['settings']['real_name']
-	user_nickname = data['settings']['nickname']
-	used_name = data['settings']['used_name']
 	similarity_req = data['settings']['similarity_req']
 	debug = data['settings']['debug']
 
@@ -59,11 +56,13 @@ class Assistant:
 
 	@classmethod
 	def startup_convo(cls):
-		print(f"{cls.assistant_name}:\nHello {cls.used_name}, I am {cls.assistant_name}.")
+		print(f"{cls.assistant_name}:\nHello {cls.user_name}, I am {cls.assistant_name}.")
 
 
 	@classmethod
 	def respond(cls, response, use_input=0):
+		response = response.replace('{assistant_name}', cls.assistant_name)
+		response = response.replace('{user_name}', cls.user_name)
 		if use_input == 0:
 			print(f'\n{cls.assistant_name}:\n{response}')
 		else:
@@ -91,49 +90,49 @@ class Assistant:
 			if 'action' in match_dict.keys():
 				# Hue lights and Smarthub Actions
 				if match_dict['action'] == 'turn_on_lights':
-					cls.func.Hue_Hub.run_scene('My Bedroom', 'Bright', 1)
+					Action.Hue_Hub.run_scene('My Bedroom', 'Bright', 1)
 
 				if match_dict['action'] == 'turn_on_backlight':
-					cls.func.Hue_Hub.run_scene('My Bedroom', 'Backlight', 1)
+					Action.Hue_Hub.run_scene('My Bedroom', 'Backlight', 1)
 
 				elif match_dict['action'] == 'turn_off_lights':
-					cls.func.Hue_Hub.set_group('My Bedroom', 'on', False)
+					Action.Hue_Hub.set_group('My Bedroom', 'on', False)
 
 				elif match_dict['action'] == 'toggle_heater':
-					cls.func.toggle_heater(match_dict['pattern'])
+					Action.toggle_heater(match_dict['pattern'])
 
 				# Computer Control Actions
 				elif match_dict['action'] == 'open_folder':
 					folder = cls.respond('What folder do you want to open?', use_input=1)
-					cls.func.open_folder(folder)
+					Action.open_folder(folder)
 
 				elif match_dict['action'] == 'run_script':
 					script = cls.respond('What script do you want to run?', use_input=1)
-					cls.func.run_script(script)
+					Action.run_script(script)
 
 				elif match_dict['action'] == 'set_audio_default':
-					cls.func.set_audio_default(match_dict['pattern'])
+					Action.set_audio_default(match_dict['pattern'])
 
 				elif match_dict['action'] == 'display_switch':
-					cls.func.display_switch(match_dict['pattern'])
+					Action.display_switch(match_dict['pattern'])
 
 				elif match_dict['action'] == 'start_vr':
-					cls.func.Start_vr()
+					Action.Start_vr()
 
 				# Informational Actions
 				elif match_dict['action'] == 'date_time':
-					response = cls.func.check_time_date(match_dict['pattern'])
+					response = Action.check_time_date(match_dict['pattern'])
 
 				elif match_dict['action'] == 'time_till':
 					if 'subject' in match_dict.keys():
-						response = cls.func.time_till(
+						response = Action.time_till(
 							day=match_dict['day'],
 							month=match_dict['month'],
 							subject=match_dict['subject'])
 					else:
 						# TODO find date in pattern
 						print(match_dict['pattern'])
-						response = cls.func.time_till(match_dict['date'])
+						response = Action.time_till(match_dict['date'])
 
 				if match_dict['action'] == 'exit':
 					exit()
