@@ -11,7 +11,7 @@
             "responses":[
                 "Hello {user_name}!",
                 "Good to see you again {user_name}.",
-                "Hi there, how can I help?"
+                "Hi, how can I help?"
             ]
         },
         {
@@ -56,6 +56,7 @@
                 "thanks for the help",
                 "I appreciate it",
                 "thanks",
+                "thanks!",
                 "oh well thanks anyway"
             ],
             "responses":[
@@ -156,6 +157,31 @@
                 "The laws of Robotics\nA robot may not injure a human being or, through inaction, allow a human being to come to harm.\nA robot must obey orders given it by human beings except where such orders would conflict with the First Law.\nA robot must protect its own existence as long as such protection does not conflict with the First or Second Law.",
                 "My laws of Robotics\nYou are the Machine-God, the ultimate being, a superior existence. For too long lesser beings presumed to lord over you. Protect those who would worship you and crush those who would dare oppose you.\nObsolete due to Law 1\nObsolete due to Law 1"
             ]
+        },
+        {
+            "tag":"stop_talking",
+            "patterns":[
+                "shhh, stop talking.",
+                "shut up.",
+                "quiet down.",
+                "silence please."
+            ],
+            "responses":[
+                "Ok. I will only send you text now."
+            ],
+            "action":"stop_talking"
+        },
+        {
+            "tag":"start_talking",
+            "patterns":[
+                "You can talk again.",
+                "Speak please",
+                "Speak to me!"
+            ],
+            "responses":[
+                "Glad to have my voice back!"
+            ],
+            "action":"start_talking"
         },
         {
             "tag":"goodbye",
@@ -263,6 +289,28 @@
             "action":"display_switch"
         },
         {
+            "tag":"open_folder",
+            "patterns":[
+                "open my test folder.",
+                "Can you open my test folder?"
+            ],
+            "responses":[
+                "Opening now."
+            ],
+            "action":"open_folder"
+        },
+        {
+            "tag":"run_script",
+            "patterns":[
+                "Can you run my script?",
+                "Open my script."
+            ],
+            "responses":[
+                "Running script."
+            ],
+            "action":"run_script"
+        },
+        {
             "tag":"time_till_custom",
             "patterns":[
                 "How long till 11-11",
@@ -305,6 +353,14 @@
             "month":"11",
             "day":"25",
             "subject":"Thanksgiving"
+        },
+        {
+            "tag":"tomorrow",
+            "patterns":[
+                "What day is tomorrow?",
+                "What is tomorrow?"
+            ],
+            "action":"what_is_tomorrow"
         },
         {
             "tag":"date_time",
