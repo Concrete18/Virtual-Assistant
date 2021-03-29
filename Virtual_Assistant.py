@@ -71,6 +71,7 @@ class Assistant:
         Arguments:
         text -- text to be spoken using Google Text-To-Speech
         '''
+		self.voice_in_use = 1
 		tts = gTTS(text=text, lang='en')
 		filename = 'voice.mp3'
 		if os.path.exists(filename):  # removes old file if it exists due to error before it is deleted
@@ -82,27 +83,37 @@ class Assistant:
 				print(error)
 			return
 		playsound.playsound(filename)
-		os.remove(filename)
+		if os.path.exists(filename):  # removes old file if it exists due to error before it is deleted
+			os.remove(filename)
+		self.voice_in_use = 0
 
 
 	def startup_convo(self):
 		'''
-		ph
+		Startup conversation and any other setup.
 		'''
 		response = f"Hello {self.user_name}, How can I help?"
-		if self.synth_voice:
-			Thread(target=self.speak, args=(response,)).start()
 		print(f'{self.assistant_name}:\n{response}')
+		if self.synth_voice:
+			self.speak(response)
+			# Thread(target=self.speak, args=(response,)).start()
 
 
 	def respond(self, response, use_input=0):
 		'''
-		ph
+		Replaces placeholders and prints/says responses.
 		'''
-		response = response.replace('{assistant_name}', self.assistant_name)
-		response = response.replace('{user_name}', self.user_name)
+		replacements = {
+			'{assistant_name}':self.assistant_name,
+			'{user_name}':self.user_name,
+		}
+		for placeholder, value in replacements.items():
+			response = response.replace(placeholder, value)
 		if self.synth_voice:
-			Thread(target=self.speak, args=(response,)).start()
+			while True:
+				if self.voice_in_use == 0:
+					Thread(target=self.speak, args=(response,)).start()
+					break
 		if use_input == 0:
 			print(f'\n{self.assistant_name}:\n{response}')
 		else:
@@ -126,14 +137,19 @@ class Assistant:
 					response = random.choice(self.unknown_msg_resp)
 				elif 'responses' in match_dict.keys():
 					response = random.choice(match_dict['responses'])
-				# assistant actions
+
 				if 'action' in match_dict.keys():
+					# assistant actions
+					if match_dict['action'] == 'assistant_status':
+						Action.assistant_status(match_dict)
+
 					# voice
 					if 'talking' in match_dict['action']:
 							if match_dict['action'] == 'start_talking':
 								self.synth_voice = 1
 							elif match_dict['action'] == 'stop_talking':
 								self.synth_voice = 0
+
 					# Hue lights and Smarthub Actions
 					if match_dict['action'] == 'turn_on_lights':
 						Action.Hue_Hub.run_scene('My Bedroom', 'Bright', 1)
@@ -145,7 +161,12 @@ class Assistant:
 						Action.Hue_Hub.set_group('My Bedroom', 'on', False)
 
 					elif match_dict['action'] == 'toggle_heater':
-						response = Action.toggle_heater(match_dict['pattern'])
+						if 'on' in match_dict['pattern']:
+							Action.Heater.turn_on()
+							response = 'Turned on the heater.'
+						else:
+							Action.Heater.turn_off()
+							response = 'Turned off the heater.'
 
 					# Computer Control Actions
 					elif match_dict['action'] == 'open_folder':
@@ -188,7 +209,9 @@ class Assistant:
 
 				self.respond(response)
 		except KeyboardInterrupt:
-			print(f'Good bye {self.user_name}')
+			print('Good bye\n')
+			print(f'{self.assistant_name}:\nGood bye {self.user_name}')
+			exit()
 
 
 if __name__ == "__main__":
