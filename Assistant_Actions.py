@@ -7,6 +7,8 @@ import subprocess
 import sys
 import re
 import os
+import random
+import psutil
 
 
 class Action:
@@ -20,6 +22,30 @@ class Action:
     ahk_speakers = 'Run nircmd setdefaultsounddevice "Logitech Speakers" 1'
     ahk_headphones = 'Run nircmd setdefaultsounddevice "Headphones"'
     ahk_tv = 'Run nircmd setdefaultsounddevice "SONY TV" 1'
+
+
+    @staticmethod
+    def assistant_status(match_dict):
+        '''
+        Opens folder given as folder_dir.
+        '''
+        # TODO finish assistant_status function
+        response = random.choice(match_dict['responses'])
+        # virtual memory
+        virtual_mem = psutil.virtual_memory()
+        total_mem = virtual_mem.total
+        used_mem = virtual_mem.used
+        # battery ifno
+        battery = psutil.sensors_battery()
+        if battery != None:
+            print('Percent:', battery.percent)
+            print('Seconds Left:', battery.secsleft)
+            print('Plugged In:', battery.power_plugged)
+            print(battery)
+            battery_info = f's'
+            response += battery_info
+        response = response.replace('{assistant_name}', self.assistant_name)
+        return response
 
 
     @staticmethod
@@ -91,22 +117,6 @@ class Action:
             self.ahk.run_script(self.ahk_tv, blocking=False)
         else:
             self.ahk.run_script(self.ahk_headphones, blocking=False)
-
-
-    def toggle_heater(self, pattern):
-        '''
-        Turns the heater on or off depending on if ON or OFF is in the pattern.
-
-        Arguments:
-
-        pattern -- matched response from Phrase_Matcher
-        '''
-        if 'on' in pattern:
-            self.Heater.turn_on()
-            return 'Turned on the heater.'
-        elif 'of' in pattern:
-            self.Heater.turn_off()
-            return 'Turned off the heater.'
 
 
     def start_vr(self):
