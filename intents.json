@@ -24,7 +24,8 @@
                 "Doing well, thanks for asking {user_name}!",
                 "Not much has changed, thanks for asking!",
                 "Thought I saw a bug but I was just looking at your code so nothing is new."
-            ]
+            ],
+            "action":"assistant_status"
         },
         {
             "tag":"what_is_your_name",
@@ -229,7 +230,9 @@
         {
             "tag":"backlight",
             "patterns":[
-                "turn on backlight"
+                "turn on backlight",
+                "turn on back light",
+                "turn on my backlight"
             ],
             "responses":[
                 "Turning on backlight."
