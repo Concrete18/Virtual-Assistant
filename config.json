@@ -4,6 +4,7 @@
         "real_name": "Michael",
         "synth_voice": 1,
         "similarity_req": 0.6,
+        "verbose": 0,
         "debug": 0
     }
 }
