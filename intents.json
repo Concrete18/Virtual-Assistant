@@ -17,13 +17,13 @@
         {
             "tag":"ask_about_assistant",
             "patterns":[
-                "How are you",
+                "How are you doing?",
                 "Whats up"
             ],
             "responses":[
                 "Doing well, thanks for asking {user_name}!",
                 "Not much has changed, thanks for asking!",
-                "Thought I saw a bug but I was just looking at your code so nothing is new."
+                "Thought I saw a bug but I was just looking at your code, so nothing is new."
             ],
             "action":"assistant_status"
         },
@@ -190,6 +190,8 @@
                 "cya",
                 "See you later",
                 "Goodbye",
+                "Good bye",
+                "bye",
                 "I am Leaving",
                 "Have a Good day",
                 "Goodnight",
